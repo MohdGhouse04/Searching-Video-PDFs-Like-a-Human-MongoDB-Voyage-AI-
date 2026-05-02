@@ -1,20 +1,18 @@
-# from app.db import test_connection, insert_sample_data, fetch_all_data
+from app.index_data import index_pdf
+from app.chat import ask_question
 
+if __name__ == "__main__":
+    # Step 1: Index PDF (run once)
+    # index_pdf("sample.pdf")
 
-# if __name__ == "__main__":
-#     test_connection()
-#     insert_sample_data()
-#     fetch_all_data()
+    # Step 2: Chat loop
+    while True:
+        query = input("\nAsk something (or 'exit'): ")
 
-from app.pdf_reader import extract_text_from_pdf
+        if query.lower() == "exit":
+            break
 
-text = extract_text_from_pdf("sample.pdf")
-print(text[:500])
-from app.pdf_reader import extract_text_from_pdf
-from app.embedding import chunk_text
+        answer = ask_question(query)
 
-text = extract_text_from_pdf("sample.pdf")
-chunks = chunk_text(text)
-
-print("Total chunks:", len(chunks))
-print(chunks[0])
+        print("\n💡 Answer:\n")
+        print(answer)
